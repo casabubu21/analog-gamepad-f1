@@ -42,5 +42,5 @@ basic.forever(function () {
         right = false
         countRadio += 1
     }
-    basic.pause(250)
+    basic.pause(100)
 })
