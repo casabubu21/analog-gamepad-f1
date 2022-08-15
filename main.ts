@@ -38,6 +38,7 @@ basic.forever(function () {
         right = false
     } else if (stop == true) {
         radio.sendValue("S", 0)
+        stop = false
     }
     basic.pause(100)
 })
