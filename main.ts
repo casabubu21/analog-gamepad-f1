@@ -3,7 +3,8 @@ pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P13, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P14, PinPullMode.PullNone)
-let countRadio = 0
+let stop = false
+let countRadio = false
 let front = false
 let back = false
 let left = false
@@ -17,6 +18,9 @@ basic.forever(function () {
         left = true
     } else if (pins.digitalReadPin(DigitalPin.P14) == 0) {
         right = true
+    }
+    if (input.buttonIsPressed(Button.A)) {
+        stop = true
     }
 })
 basic.forever(function () {
@@ -32,6 +36,8 @@ basic.forever(function () {
     } else if (right == true) {
         radio.sendValue("R", 0)
         right = false
+    } else if (stop == true) {
+        radio.sendValue("S", 0)
     }
     basic.pause(100)
 })
