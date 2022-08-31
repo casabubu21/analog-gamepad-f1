@@ -4,6 +4,7 @@ pins.setPull(DigitalPin.P13, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P14, PinPullMode.PullNone)
 let stop = false
+let Turbo = false
 let countRadio = false
 let front = false
 let back = false
@@ -22,6 +23,9 @@ basic.forever(function () {
     if (input.buttonIsPressed(Button.A)) {
         stop = true
     }
+    if (input.buttonIsPressed(Button.B)) {
+        Turbo = true
+    }
 })
 basic.forever(function () {
     if (front == true) {
@@ -39,6 +43,25 @@ basic.forever(function () {
     } else if (stop == true) {
         radio.sendValue("S", 0)
         stop = false
+    } else if (Turbo == true) {
+        radio.sendValue("T", 0)
+        Turbo = false
     }
     basic.pause(100)
+})
+basic.forever(function () {
+    if (input.buttonIsPressed(Button.AB)) {
+        basic.showString("3")
+        basic.pause(500)
+        basic.clearScreen()
+        basic.showString("2")
+        basic.pause(500)
+        basic.clearScreen()
+        basic.showString("1")
+        basic.pause(500)
+        basic.clearScreen()
+        basic.showString("VIA")
+        basic.pause(500)
+        basic.clearScreen()
+    }
 })
