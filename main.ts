@@ -1,8 +1,13 @@
+input.onLogoEvent(TouchButtonEvent.Touched, function () {
+	
+})
 radio.setGroup(8)
+pins.setPull(DigitalPin.P8, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P13, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P16, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P14, PinPullMode.PullNone)
+let _321via = false
 let stop = false
 let Turbo = false
 let countRadio = false
@@ -19,6 +24,8 @@ basic.forever(function () {
         left = true
     } else if (pins.digitalReadPin(DigitalPin.P14) == 0) {
         right = true
+    } else if (pins.digitalReadPin(DigitalPin.P8) == 0) {
+        _321via = true
     }
     if (input.buttonIsPressed(Button.A)) {
         stop = true
@@ -50,7 +57,7 @@ basic.forever(function () {
     basic.pause(100)
 })
 basic.forever(function () {
-    if (input.buttonIsPressed(Button.AB)) {
+    if (_321via == true) {
         basic.showString("3")
         basic.pause(500)
         basic.clearScreen()
@@ -63,5 +70,6 @@ basic.forever(function () {
         basic.showString("VIA")
         basic.pause(500)
         basic.clearScreen()
+        _321via = false
     }
 })
