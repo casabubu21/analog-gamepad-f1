@@ -1,3 +1,4 @@
+let JoyY = 0
 let JoyX = 0
 radio.setGroup(8)
 pins.setPull(DigitalPin.P8, PinPullMode.PullNone)
@@ -15,9 +16,10 @@ let left = false
 let right = false
 basic.forever(function () {
     JoyX = pins.analogReadPin(AnalogPin.P1)
-    serial.writeNumber(JoyX)
-    serial.writeString("")
-    basic.pause(1000)
+    JoyY = pins.analogReadPin(AnalogPin.P2)
+    serial.writeNumber(JoyY)
+    serial.writeLine("")
+    basic.pause(200)
 })
 basic.forever(function () {
     if (pins.digitalReadPin(DigitalPin.P15) == 0) {
