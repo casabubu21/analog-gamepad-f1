@@ -1,6 +1,4 @@
-input.onLogoEvent(TouchButtonEvent.Touched, function () {
-	
-})
+let JoyX = 0
 radio.setGroup(8)
 pins.setPull(DigitalPin.P8, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
@@ -15,6 +13,12 @@ let front = false
 let back = false
 let left = false
 let right = false
+basic.forever(function () {
+    JoyX = pins.analogReadPin(AnalogPin.P1)
+    serial.writeNumber(JoyX)
+    serial.writeString("")
+    basic.pause(1000)
+})
 basic.forever(function () {
     if (pins.digitalReadPin(DigitalPin.P15) == 0) {
         front = true
