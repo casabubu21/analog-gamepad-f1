@@ -13,6 +13,9 @@ let back = false
 let left = false
 let right = false
 let JoyX = 0
+let JoyY = 0
+let Xpercentuale = 0
+let JoyStick = [0, 0]
 basic.forever(function () {
     if (pins.digitalReadPin(DigitalPin.P15) == 0) {
         front = true
@@ -55,9 +58,12 @@ basic.forever(function () {
     basic.pause(80)
 })
 basic.forever(function () {
-    JoyX = pins.digitalReadPin(DigitalPin.P1)
-    serial.writeString("" + (JoyX))
-    basic.pause(200)
+    JoyX = pins.analogReadPin(AnalogPin.P1)
+    JoyY = pins.analogReadPin(AnalogPin.P2)
+    Xpercentuale = (JoyX - 508) * 0.1968
+    JoyStick = [JoyX, JoyY, Xpercentuale]
+    serial.writeNumbers(JoyStick)
+    basic.pause(100)
 })
 basic.forever(function () {
     if (_321via == true) {
