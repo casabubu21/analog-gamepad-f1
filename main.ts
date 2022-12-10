@@ -12,6 +12,7 @@ let front = false
 let back = false
 let left = false
 let right = false
+let JoyX = 0
 basic.forever(function () {
     if (pins.digitalReadPin(DigitalPin.P15) == 0) {
         front = true
@@ -52,6 +53,11 @@ basic.forever(function () {
         Turbo = false
     }
     basic.pause(80)
+})
+basic.forever(function () {
+    JoyX = pins.digitalReadPin(DigitalPin.P1)
+    serial.writeString("" + (JoyX))
+    basic.pause(200)
 })
 basic.forever(function () {
     if (_321via == true) {
