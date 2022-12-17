@@ -1,5 +1,5 @@
 {
-    "name": "gamepad-truck-analog",
+    "name": "analog-gamepad-f1",
     "description": "",
     "dependencies": {
         "core": "*",
