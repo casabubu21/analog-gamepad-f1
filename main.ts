@@ -54,8 +54,7 @@ basic.forever(function () {
     JoyY = pins.analogReadPin(AnalogPin.P2)
     Xpcento = (JoyX - 508) * 0.1968
     JoyStick = [JoyX, Xpcento]
-    serial.writeNumbers(JoyStick)
-    basic.pause(100)
+    basic.pause(50)
 })
 basic.forever(function () {
     if (_321via == true) {
