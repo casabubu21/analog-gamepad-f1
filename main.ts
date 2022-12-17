@@ -10,21 +10,15 @@ let Turbo = false
 let countRadio = false
 let front = false
 let back = false
-let left = false
-let right = false
 let JoyX = 0
 let JoyY = 0
-let Xpercentuale = 0
+let Xpcento = 0
 let JoyStick = [0, 0]
 basic.forever(function () {
     if (pins.digitalReadPin(DigitalPin.P15) == 0) {
         front = true
     } else if (pins.digitalReadPin(DigitalPin.P13) == 0) {
         back = true
-    } else if (pins.digitalReadPin(DigitalPin.P16) == 0) {
-        left = true
-    } else if (pins.digitalReadPin(DigitalPin.P14) == 0) {
-        right = true
     } else if (pins.digitalReadPin(DigitalPin.P8) == 0) {
         _321via = true
     }
@@ -36,18 +30,16 @@ basic.forever(function () {
     }
 })
 basic.forever(function () {
+    if (Xpcento < -2 || Xpcento > 2) {
+        radio.sendValue("X", Xpcento)
+        basic.pause(50)
+    }
     if (front == true) {
         radio.sendValue("F", 0)
         front = false
     } else if (back == true) {
         radio.sendValue("B", 0)
         back = false
-    } else if (left == true) {
-        radio.sendValue("L", 0)
-        left = false
-    } else if (right == true) {
-        radio.sendValue("R", 0)
-        right = false
     } else if (stop == true) {
         radio.sendValue("S", 0)
         stop = false
@@ -55,13 +47,13 @@ basic.forever(function () {
         radio.sendValue("T", 0)
         Turbo = false
     }
-    basic.pause(80)
+    basic.pause(50)
 })
 basic.forever(function () {
     JoyX = pins.analogReadPin(AnalogPin.P1)
     JoyY = pins.analogReadPin(AnalogPin.P2)
-    Xpercentuale = (JoyX - 508) * 0.1968
-    JoyStick = [JoyX, JoyY, Xpercentuale]
+    Xpcento = (JoyX - 508) * 0.1968
+    JoyStick = [JoyX, Xpcento]
     serial.writeNumbers(JoyStick)
     basic.pause(100)
 })
